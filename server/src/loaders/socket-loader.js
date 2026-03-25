@@ -5,7 +5,13 @@ let io;
 export const socketLoader = (server) =>{
     io = new Server(server,{
         cors:{
-            origin:"*",
+            // origin:"*",
+            origin:[
+                process.env.FRONTEND_URL_LOCAL,
+                process.env.FRONTEND_URL_PROD,
+            ].filter(Boolean),
+            methods:['GET', 'POST'],
+            credentials:true,
         },
     });
 

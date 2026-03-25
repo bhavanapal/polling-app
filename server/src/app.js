@@ -17,13 +17,18 @@ const createApp = () =>{
     app.use(express.urlencoded({extended: true, limit: '10mb'}));
 
     // third-party middleware
-    // const allowedOrigins = ["http://localhost:5173"];
-    const allowedOrigins = ["https://polling-app-six-inky.vercel.app"];
+    const allowedOrigins=[
+        process.env.FRONTEND_URL_LOCAL,
+        process.env.FRONTEND_URL_PROD,
+    ].filter(Boolean);
 
     app.use(
         cors({
-            // origin: "http://localhost:5173",
-            origin:"https://polling-app-six-inky.vercel.app",
+            origin:function(origin, callback) {
+                if(!origin) return callback(null, true);
+                if(allowedOrigins.includes(origin)) callback(null, true);
+                else callback(new Error('Not allowed by CORS'));
+            },
             credentials:true,
         })
     );
