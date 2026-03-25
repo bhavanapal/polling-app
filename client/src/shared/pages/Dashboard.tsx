@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { usePollStore } from "../../modules/polls/store/pollStore"
 import { pollApi } from "../services/pollApi";
 import { socket } from "../utils/socket";
@@ -6,25 +6,32 @@ import VoteChart from "../components/VoteChart";
 import { Navbar } from "../components/Navbar";
 import PollCard from "@/modules/polls/components/pollcard";
 import {motion} from "framer-motion"
+import type { Poll } from "../types/poll";
 
 
 export const Dashboard=() => {
     const polls = usePollStore((state) => state.polls);
     const setPolls = usePollStore((state) => state.setPolls);
+    const updatePoll = usePollStore((state) => state.updatePoll);
 
-   const fetchPolls = async() => {
+   const fetchPolls = useCallback(async() => {
        const res = await pollApi.getAllPolls();
        setPolls(res.data);
-     }
+     },[setPolls]);
 
   useEffect(() => {
     fetchPolls();
     socket.connect();
-    socket.on("pollUpdated", (updatedPolls) => {
-        usePollStore.getState().updatePoll(updatedPolls)
-    });
-    return () => socket.disconnect();
-  },[]);
+
+    const handlePollUpdated = (updatedPolls:Poll[]) => {
+      updatedPolls.forEach((poll) => updatePoll(poll));
+    };
+    socket.on("pollUpdated", handlePollUpdated);
+    return () =>{
+    socket.off("pollUpdated", handlePollUpdated);
+    socket.disconnect();
+    } 
+  },[fetchPolls,updatePoll]);
 
   return(
     <div className="min-h-screen bg-slate-950 text-white">

@@ -1,9 +1,10 @@
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../../modules/auth/store/authStore";
+import type { ReactNode } from "react";
 
 
 interface Props{  
-    children: JSX.Element;
+    children: ReactNode;
     adminOnly?: boolean;
 }
 
