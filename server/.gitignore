@@ -1,0 +1,55 @@
+# Node modules (never commit these)
+node_modules/
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.staging
+.env.production
+
+# Runtime data / process IDs
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Temporary files from IDEs/editors
+.vscode/
+.idea/
+.DS_Store
+
+# Optional npm cache directory
+.npm
+.pnpm-store/
+
+# REPL history
+.node_repl_history
+
+# OS files
+.DS_Store
+Thumbs.db
+.AppleDouble
+
+# Editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Backup files
+*.bak
+*.tmp
+
+# Build/dist folders (if using TS or other compile step)
+dist/
+build/
