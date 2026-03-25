@@ -18,12 +18,12 @@ const createApp = () =>{
 
     // third-party middleware
     // const allowedOrigins = ["http://localhost:5173"];
-    const allowedOrigins = ["https://polling-app-six-inky.vercel.app/register"];
+    const allowedOrigins = ["https://polling-app-six-inky.vercel.app"];
 
     app.use(
         cors({
             // origin: "http://localhost:5173",
-            origin:"https://polling-app-six-inky.vercel.app/register",
+            origin:"https://polling-app-six-inky.vercel.app",
             credentials:true,
         })
     );
