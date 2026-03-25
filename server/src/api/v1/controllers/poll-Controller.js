@@ -1,5 +1,5 @@
 import { getIO } from "../../../loaders/socket-loader.js";
-import Poll from "../../../models/Poll.js";
+import Poll from "../../../models/poll.js";
 
 // create poll(admin only)
 export const createPoll = async(req,res) => {
