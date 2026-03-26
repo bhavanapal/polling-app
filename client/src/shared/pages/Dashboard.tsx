@@ -23,8 +23,12 @@ export const Dashboard=() => {
     fetchPolls();
     socket.connect();
 
-    const handlePollUpdated = (updatedPolls:Poll[]) => {
-      updatedPolls.forEach((poll) => updatePoll(poll));
+    const handlePollUpdated = (updatedPolls:Poll | Poll[]) => {
+      if(Array.isArray(updatedPolls)){
+       updatedPolls.forEach((poll) => updatePoll(poll));
+      } else{
+        updatePoll(updatedPolls);
+      }  
     };
     socket.on("pollUpdated", handlePollUpdated);
     return () =>{
