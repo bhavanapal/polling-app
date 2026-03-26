@@ -51,7 +51,8 @@ export const PollList = ({user}:pollList) => {
     return(
         <div className="space-y-6 p-4">
             {polls.map((poll) => {
-                const totalVotes = poll.options.reduce((sum, o) => sum + o.votes, 0) || 1;
+                const options = Array.isArray(poll.options) ? poll.options : [];
+                const totalVotes = options.reduce((sum, o) => sum + (o.votes || 0), 0) || 1;
                 return(
                      <motion.div
                       key={poll._id}
@@ -62,7 +63,7 @@ export const PollList = ({user}:pollList) => {
                     <h2 className="text-lg font-semibold mb-4">{poll.question}</h2>
                     {/* vote options */}
                     <ul className="space-y-3">
-                        {poll.options.map((opt,i) => {
+                        {options.map((opt,i) => {
                             const widthPercent = (opt.votes/totalVotes)*100;
 
                             return(
