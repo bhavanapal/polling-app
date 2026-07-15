@@ -46,7 +46,7 @@ export const SignIn=()=>{
  return(
        <div className="min-h-screen flex items-center justify-center bg-slate-950 px-4 relative overflow-hidden">
               {/* Background glow */}
-      <div className="absolute w-[500px] h-[500px] bg-indigo-600/20 blur-3xl rounded-full top-10 left-1/2 -translate-x-1/2" />
+      <div className="absolute w-[300px] h-[300px] sm:w-[500px] sm:h-[500px] bg-indigo-600/20 blur-3xl rounded-full top-10 left-1/2 -translate-x-1/2" />
         {/* Animated container */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
