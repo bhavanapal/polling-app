@@ -6,7 +6,7 @@ import { initializeApp } from './src/loaders/index-loader.js';
 dotenv.config();
 
 // Start server
-const startServer = async () =>{
+const startServer = async () => {
     try{
 //  Initialize appplication with express
 const {server} =  await initializeApp();
